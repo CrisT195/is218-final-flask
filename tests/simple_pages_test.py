@@ -30,3 +30,9 @@ def test_request_page1(client):
     response = client.get("/welcome")
     assert response.status_code == 200
     assert b"welcome" in response.data
+
+
+def test_request_page_not_found(client):
+    """This tests the 404 page"""
+    response = client.get("/page5")
+    assert response.status_code == 404
