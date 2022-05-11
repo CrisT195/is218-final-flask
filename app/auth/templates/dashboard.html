@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% from 'bootstrap5/form.html' import render_form, render_field, render_form_row %}
+    <div id="row">
+        <h2>Dashboard</h2>
+        <p>Welcome: {{ current_user.email }}</p>
+
+
+{#        <a href="{{ url_for("transactions.transactions_browse") }}" class="btn col-3 mb-5 btn-info" role="button">Browse Transactions</a>#}
+
+    </div>
+{% endblock %}
