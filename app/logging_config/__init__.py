@@ -56,6 +56,7 @@ def setup_logs():
     logging.config.dictConfig(LOGGING_CONFIG)
 
     # log to logfile misc_debug.log
+
     log = logging.getLogger("misc_debug")
     log.debug("Just configured logging")
 
@@ -133,12 +134,12 @@ LOGGING_CONFIG = {
             'maxBytes': 10000000,
             'backupCount': 5,
         },
-        'file.handler.misc_debug': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'standard',
-            'filename': os.path.join(config.Config.LOG_DIR, 'misc_debug.log'),
-            'maxBytes': 10000000,
-            'backupCount': 5,
+        'file.handler.misc_debug':{
+            'class':  'logging.handlers.RotatingFileHandler',
+            'formatter':  'standard',
+            'filename':  os.path.join(config.Config.LOG_DIR, 'misc_debug.log'),
+            'maxBytes':  10000000,
+            'backupCount':  5,
         },
         'file.handler.upload_transactions': {
             'class': 'logging.handlers.RotatingFileHandler',
