@@ -28,7 +28,7 @@ def after_request_logging(response):
     elif request.path.startswith('/bootstrap'):
         return response
 
-    # log to request.log
+    #  log to request.log
     log = logging.getLogger("request")
     log.info('Response status: %s' % response.status)
 
@@ -110,8 +110,8 @@ LOGGING_CONFIG = {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'standard',
             'filename': os.path.join(config.Config.LOG_DIR, 'request.log'),
-            'maxBytes': 10000000,
-            'backupCount': 5,
+            'maxBytes':  10000000,
+            'backupCount':  5,
         },
         'file.handler.errors': {
             'class': 'logging.handlers.RotatingFileHandler',
