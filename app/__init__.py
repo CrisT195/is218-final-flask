@@ -21,6 +21,7 @@ from app.db.models import User
 from app.error_handlers import error_handlers
 from app.logging_config import log_con, LOGGING_CONFIG
 from app.simple_pages import simple_pages
+from app.transaction import transaction
 import logging
 from flask.logging import default_handler
 
@@ -47,15 +48,19 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
     csrf = CSRFProtect(app)
+    app.config['WTF_CSRF_ENABLED'] = False
     bootstrap = Bootstrap5(app)
     app.register_blueprint(simple_pages)
 
     app.register_blueprint(auth)
     app.register_blueprint(database)
+
+    app.register_error_handler(404, page_not_found)
     app.context_processor(utility_text_processors)
 
     app.register_blueprint(log_con)
     app.register_blueprint(error_handlers)
+    app.register_blueprint(transaction)
 
     db.init_app(app)
     # add command function to cli commands
