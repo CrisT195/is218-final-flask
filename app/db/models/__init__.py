@@ -10,7 +10,7 @@ Base = declarative_base()
 
 # transaction_user = db.Table('transaction_user', db.Model.metadata,
 #     db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-#     db.Column('transaction_id', db.Integer, db.ForeignKey('transactions.id'))
+#     db.Column('transaction_id', db.Integer, db.ForeignKey('transaction.id'))
 # )
 
 # class Transaction(db.Model, SerializerMixin):
@@ -35,6 +35,22 @@ Base = declarative_base()
 #         csv_header = ('Name', 'Artist', 'Year', 'Genre')
 #         return csv_header
 
+class Transaction(db.Model):
+    __tablename__ = 'transaction'
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(300), nullable=True, unique=False)
+    amount = db.Column(db.String(300), nullable=True, unique=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = relationship("User", back_populates="transaction", uselist=False)
+
+    def get_id(self):
+        return self.id
+
+    def __init__(self, amount, type):
+        self.type = type
+        self.amount = amount
+
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -47,7 +63,8 @@ class User(UserMixin, db.Model):
     registered_on = db.Column('registered_on', db.DateTime)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     is_admin = db.Column('is_admin', db.Boolean(), nullable=False, server_default='0')
-    # transactions = db.relationship("Transaction",
+    transaction = db.relationship("Transaction", back_populates="user", cascade="all, delete")
+    # transaction = db.relationship("Transaction",
     #                         secondary=transaction_user, backref="users")
 
     # `roles` and `groups` are reserved words that *must* be defined

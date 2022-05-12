@@ -6,6 +6,7 @@ from app.auth.forms import login_form, register_form, profile_form, security_for
 from app.db import db
 from app.db.models import User
 from flask import current_app
+import logging
 
 auth = Blueprint('auth', __name__, template_folder='templates')
 

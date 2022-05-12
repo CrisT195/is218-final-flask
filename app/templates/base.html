@@ -37,13 +37,14 @@
                             {% if current_user.is_admin %}
                                 {{ render_nav_item('auth.browse_users','User Management' ) }}
                             {% endif %}
+                            {{ render_nav_item('transaction.transaction_upload','Upload File' ) }}
+                            {{ render_nav_item('transaction.browse_transaction_datatables','Browse' ) }}
+                        {% else %}
+                            {{ render_nav_item('simple_pages.index', 'Home') }}
+                        {% endif %}
 
-                         {% else %}
-                             {{ render_nav_item('simple_pages.index', 'Home') }}
-                         {% endif %}
-
-                         {{ render_nav_item('simple_pages.about','About') }}
-                         {{ render_nav_item('simple_pages.welcome','Welcome') }}
+                        {{ render_nav_item('simple_pages.about','About') }}
+                        {{ render_nav_item('simple_pages.welcome','Welcome') }}
                     </div>
                 </div>
                 <div class="navbar-nav d-flex">
